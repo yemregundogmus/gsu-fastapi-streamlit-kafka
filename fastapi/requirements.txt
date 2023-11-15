@@ -1,0 +1,5 @@
+numpy
+fastapi==0.88.0
+scikit-learn
+uvicorn
+kafka-python
