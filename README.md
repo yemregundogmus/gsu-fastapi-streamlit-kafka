@@ -1,7 +1,14 @@
-# Ka|Ve Docker Compose Example
+# GSÜ Example
 # Açıklama
 
-Bu çalışma kapsamında temel bir streamlit uygulamasını front-end, fastapi uygulamasını back-end olarak kullanacağız. Kullanıcıdan streamlit üzerinden değerleri alarak arka plandaki fastapi servisimizde tahminleme işlemini gerçekleştireceğiz. Ardından API'den gelen sonucu ekrana yazdıracağız. 
+Bu çalışma kapsamında temel bir streamlit uygulamasını front-end, fastapi uygulamasını back-end, aradaki istekler içinde kafka yapısını kullanacağız. Kullanıcıdan streamlit üzerinden değerleri alarak kafka'da to_process adlı topic'e yollayıp, arka plandaki fastapi servisimizle bu değerleri topic'ten alacak, tahminleme işlemini gerçekleştireceğiz. Ardından API'den işlenmiş verinin sonucunu processed topic'ine yazacağız. Consumer adını verdiğimiz python kodumuzda bu değerleri alıp bir json dosyasına yazacak. Streamlit uygulamamızda json'daki değerleri sürekli okuyarak kullanıcıya sonucu dönecek. 
+
+Kafka üzerindeki topicleri, producer ve consumer'ları da kafkaui adını verdiğimiz uygulama üzerinden takip edebileceğiz. 
+
+Not: Bu sistem bu tip bir uygulama için en iyi mimariyi içermez, öğrencilere bu teknolojilerin anlatılması için geliştirilmiştir. 
+
+Uygulamanın çalışması şeması;
+![Aarch](app-arch-basic.png "Arch")
 
 # AWS üzerinde Canlıya Alma
 - AWS üzerinde uygulamanın canlıya alınabilmesi için öncelikle [AWS EC2](https://us-east-1.console.aws.amazon.com/ec2/) servisi üzerinden 1GB RAM 1VCPU'ya sahip bir makine açılması gerekmektedir. Makine tipi olarak ücretsiz olduğu için t2.micro tercih edilebilir. 
@@ -36,4 +43,4 @@ docker-compose version
 docker-compose up --build
 ```
 
-Ardından makinenin public ipsinde 8501 portuna giderek uygulamaya erişebilirsiniz.
+Ardından makinenin public ipsinde 8501 portuna giderek uygulamaya erişebilirsiniz. 8080 Portundan KafkaUI adlı uygulama yardımıyla kafka bilgilerine erişebilirsiniz.
